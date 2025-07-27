@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD HTML WIEW</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9fa;
+            --success-color: #4cc9f0;
+            --warning-color: #f8961e;
+            --danger-color: #f72585;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 0;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 28px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .main-app {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-app {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .editor-container, .preview-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .panel-title {
+            font-weight: 700;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .panel-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: #6c757d;
+            cursor: pointer;
+            font-size: 16px;
+            transition: var(--transition);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-btn:hover {
+            background-color: #e9ecef;
+            color: var(--primary-color);
+        }
+
+        .code-editor {
+            width: 100%;
+            min-height: 500px;
+            padding: 15px;
+            border: none;
+            resize: none;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+            background-color: #f8f9fa;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            tab-size: 4;
+        }
+
+        .code-editor:focus {
+            outline: none;
+            background-color: white;
+        }
+
+        .preview-frame {
+            width: 100%;
+            height: 500px;
+            border: none;
+            background-color: white;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+        }
+
+        .features-section {
+            margin-top: 40px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        .feature-desc {
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        /* Dark mode styles */
+        .dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .editor-container,
+        .dark-mode .preview-container,
+        .dark-mode .feature-card {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .panel-header {
+            background-color: #2d2d2d;
+            border-bottom-color: #3d3d3d;
+        }
+
+        .dark-mode .code-editor {
+            background-color: #2d2d2d;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .code-editor:focus {
+            background-color: #252525;
+        }
+
+        .dark-mode .feature-title {
+            color: #e0e0e0;
+        }
+
+        .dark-mode .feature-desc {
+            color: #a0a0a0;
+        }
+
+        /* Syntax highlighting */
+        .token.comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+            color: #6a9955;
+        }
+
+        .token.punctuation {
+            color: #d4d4d4;
+        }
+
+        .token.property,
+        .token.tag,
+        .token.boolean,
+        .token.number,
+        .token.constant,
+        .token.symbol,
+        .token.deleted {
+            color: #b5cea8;
+        }
+
+        .token.selector,
+        .token.attr-name,
+        .token.string,
+        .token.char,
+        .token.builtin,
+        .token.inserted {
+            color: #ce9178;
+        }
+
+        .token.operator,
+        .token.entity,
+        .token.url,
+        .language-css .token.string,
+        .style .token.string {
+            color: #d4d4d4;
+        }
+
+        .token.atrule,
+        .token.attr-value,
+        .token.keyword {
+            color: #569cd6;
+        }
+
+        .token.function,
+        .token.class-name {
+            color: #dcdcaa;
+        }
+
+        .token.regex,
+        .token.important,
+        .token.variable {
+            color: #d16969;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .btn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-code"></i>
+                    <h1>MD HTML VIEW</h1>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-primary" id="run-btn">
+                        <i class="fas fa-play"></i> تشغيل الكود
+                    </button>
+                    <button class="btn btn-secondary" id="dark-mode-btn">
+                        <i class="fas fa-moon"></i> الوضع الليلي
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="main-app">
+            <div class="editor-container">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <i class="fas fa-edit"></i>
+                        <span>محرر الأكواد</span>
+                    </div>
+                    <div class="panel-actions">
+                        <button class="action-btn" id="clear-btn" title="مسح الكود">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <button class="action-btn" id="copy-btn" title="نسخ الكود">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button class="action-btn" id="format-btn" title="تنسيق الكود">
+                            <i class="fas fa-indent"></i>
+                        </button>
+                    </div>
+                </div>
+                <textarea id="html-editor" class="code-editor" placeholder="أدخل كود HTML هنا..."><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحتي الأولى</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>مرحباً بالعالم!</h1>
+        <p>هذه صفحة HTML مثاليه لتبدأ بها. يمكنك تعديل الكود في مربع المحرر ورؤية النتائج مباشرة.</p>
+        <p>جرب تغيير بعض النصوص أو إضافة عناصر جديدة!</p>
+    </div>
+</body>
+</html></textarea>
+            </div>
+
+            <div class="preview-container">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <i class="fas fa-eye"></i>
+                        <span>معاينة النتيجة</span>
+                    </div>
+                    <div class="panel-actions">
+                        <button class="action-btn" id="refresh-btn" title="تحديث المعاينة">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <button class="action-btn" id="fullscreen-btn" title="ملء الشاشة">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+                <iframe id="preview-frame" class="preview-frame"></iframe>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2 class="section-title"><i class="fas fa-star"></i> مميزات القارئ</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="feature-title">تشغيل فوري</h3>
+                    <p class="feature-desc">معاينة التغييرات فوراً عند تعديل الكود دون الحاجة لتحديث الصفحة</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3 class="feature-title">الوضع الليلي</h3>
+                    <p class="feature-desc">وضع مظلم مريح للعين مناسب للعمل لساعات طويلة</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="feature-title">تنسيق الأكواد</h3>
+                    <p class="feature-desc">إمكانية تنسيق الكود لجعله أكثر قابلية للقراءة</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-copy"></i>
+                    </div>
+                    <h3 class="feature-title">نسخ الأكواد</h3>
+                    <p class="feature-desc">نسخ الكود بكبسة زر واحدة للاستخدام في مشاريعك</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-expand"></i>
+                    </div>
+                    <h3 class="feature-title">ملء الشاشة</h3>
+                    <p class="feature-desc">عرض النتيجة في وضع ملء الشاشة لرؤية أفضل</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="feature-title">متجاوب</h3>
+                    <p class="feature-desc">واجهة مستخدم متكيفة مع جميع أحجام الشاشات</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 قارئ الأكواد الاحترافي. جميع الحقوق محفوظة.</p>
+            <p>تم التطوير باستخدام HTML, CSS و JavaScript</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // العناصر الرئيسية
+            const htmlEditor = document.getElementById('html-editor');
+            const previewFrame = document.getElementById('preview-frame');
+            const runBtn = document.getElementById('run-btn');
+            const darkModeBtn = document.getElementById('dark-mode-btn');
+            const clearBtn = document.getElementById('clear-btn');
+            const copyBtn = document.getElementById('copy-btn');
+            const formatBtn = document.getElementById('format-btn');
+            const refreshBtn = document.getElementById('refresh-btn');
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            const body = document.body;
+
+            // تشغيل الكود الأولي
+            updatePreview();
+
+            // تحديث المعاينة عند الضغط على زر التشغيل
+            runBtn.addEventListener('click', updatePreview);
+
+            // تحديث المعاينة عند تغيير المحرر (مع تأخير 500 مللي ثانية)
+            let timeout;
+            htmlEditor.addEventListener('input', function() {
+                clearTimeout(timeout);
+                timeout = setTimeout(updatePreview, 500);
+            });
+
+            // تفعيل/إلغاء الوضع الليلي
+            darkModeBtn.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                const icon = darkModeBtn.querySelector('i');
+                if (body.classList.contains('dark-mode')) {
+                    icon.classList.replace('fa-moon', 'fa-sun');
+                    darkModeBtn.setAttribute('title', 'الوضع النهاري');
+                } else {
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                    darkModeBtn.setAttribute('title', 'الوضع الليلي');
+                }
+            });
+
+            // مسح المحرر
+            clearBtn.addEventListener('click', function() {
+                if (confirm('هل أنت متأكد من أنك تريد مسح الكود؟')) {
+                    htmlEditor.value = '';
+                    updatePreview();
+                }
+            });
+
+            // نسخ الكود
+            copyBtn.addEventListener('click', function() {
+                htmlEditor.select();
+                document.execCommand('copy');
+                
+                // تغيير الأيقونة مؤقتًا للإشارة إلى النسخ
+                const icon = copyBtn.querySelector('i');
+                icon.classList.replace('fa-copy', 'fa-check');
+                copyBtn.setAttribute('title', 'تم النسخ!');
+                
+                setTimeout(function() {
+                    icon.classList.replace('fa-check', 'fa-copy');
+                    copyBtn.setAttribute('title', 'نسخ الكود');
+                }, 2000);
+            });
+
+            // تنسيق الكود
+            formatBtn.addEventListener('click', function() {
+                try {
+                    const formattedCode = formatHTML(htmlEditor.value);
+                    htmlEditor.value = formattedCode;
+                    updatePreview();
+                } catch (error) {
+                    alert('حدث خطأ أثناء تنسيق الكود: ' + error.message);
+                }
+            });
+
+            // تحديث المعاينة
+            refreshBtn.addEventListener('click', updatePreview);
+
+            // ملء الشاشة
+            fullscreenBtn.addEventListener('click', function() {
+                if (previewFrame.requestFullscreen) {
+                    previewFrame.requestFullscreen();
+                } else if (previewFrame.webkitRequestFullscreen) {
+                    previewFrame.webkitRequestFullscreen();
+                } else if (previewFrame.msRequestFullscreen) {
+                    previewFrame.msRequestFullscreen();
+                }
+            });
+
+            // وظيفة تحديث المعاينة
+            function updatePreview() {
+                const htmlCode = htmlEditor.value;
+                const previewDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
+                
+                previewDoc.open();
+                previewDoc.write(htmlCode);
+                previewDoc.close();
+            }
+
+            // وظيفة تنسيق HTML (مبسطة)
+            function formatHTML(html) {
+                // هذه وظيفة مبسطة، يمكن استبدالها بمكتبة متخصصة مثل js-beautify
+                let formatted = '';
+                let indent = 0;
+                const lines = html.split('\n');
+                
+                for (let line of lines) {
+                    line = line.trim();
+                    
+                    if (line.match(/<\/.+>/)) {
+                        indent--;
+                    }
+                    
+                    if (indent > 0) {
+                        formatted += '    '.repeat(indent);
+                    }
+                    
+                    formatted += line + '\n';
+                    
+                    if (line.match(/<[^/].*>/) && !line.match(/<.+\/>/) && !line.match(/<(meta|link|img|br|hr|input)/i)) {
+                        indent++;
+                    }
+                }
+                
+                return formatted;
+            }
+
+            // إضافة تأثيرات للواجهة
+            document.querySelectorAll('.btn, .action-btn').forEach(btn => {
+                btn.addEventListener('mousedown', function() {
+                    this.style.transform = 'translateY(1px)';
+                });
+                btn.addEventListener('mouseup', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
